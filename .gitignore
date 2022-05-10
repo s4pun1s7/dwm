@@ -1,9 +1,10 @@
 token
+run.sh
 .gitignore
 *.orig
 *.rej
 patches
-util.o
+*.o
 dwm
-dwm.o
-drw.o
+*.diff
+
