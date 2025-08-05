@@ -32,6 +32,8 @@ static const Rule rules[] = {
 	 */
 	/* class        instance    title    tags mask     isfloating   monitor */
 	{ "Gimp",       NULL,       NULL,       0,            1,           -1 },
+	{ "st-256color", NULL,       NULL,       0,            1,           -1 },
+	{ "Emulator",    NULL,       NULL,       0,            1,           -1 },
 	{ "Google-chrome", NULL,     NULL,       0,            1,           -1 },
 	{ "Guake",      NULL,       NULL,       0,            1,           -1 },
 	{ "ViberPC",  NULL,       NULL,        0,            1,           -1 },
@@ -67,15 +69,17 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
+static const char *htopcmd[]  = { "st", "-e", "htop", NULL };
 static const char *incvol[]  = { "/ust/bin/amixer", "set", "Master", "5+", NULL };
 static const char *decvol[]  = { "/ust/bin/amixer", "set", "Master", "5-", NULL };
-static const char *upbrightness[]   = { "xbacklight", "-inc", "10", NULL };
-static const char *downbrightness[] = { "xbacklight", "-dec", "10", NULL };
+/*static const char *upbrightness[]   = { "xbacklight", "-inc", "10", NULL };
+static const char *downbrightness[] = { "xbacklight", "-dec", "10", NULL }; */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                 		XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY,                 		XK_r,       spawn,          {.v = htopcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
@@ -98,8 +102,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ 0,            XF86XK_AudioLowerVolume,   spawn,          {.v = decvol } },
 	{ 0,            XF86XK_AudioRaiseVolume,   spawn,          {.v = incvol } },
+/*
 	{ 0,            XF86XK_MonBrightnessUp,    spawn,          {.v = upbrightness } },
 	{ 0,            XF86XK_MonBrightnessDown,  spawn,          {.v = downbrightness } },
+*/
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
