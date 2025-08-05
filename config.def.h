@@ -1,4 +1,6 @@
 /* See LICENSE file for copyright and license details. */
+/* TODO: implement media fn keys */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
@@ -28,8 +30,12 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	/* class        instance    title    tags mask     isfloating   monitor */
+	{ "Gimp",       NULL,       NULL,       0,            1,           -1 },
+	{ "Google-chrome", NULL,     NULL,       0,            1,           -1 },
+	{ "Guake",      NULL,       NULL,       0,            1,           -1 },
+	{ "ViberPC",  NULL,       NULL,        0,            1,           -1 },
+	{ "TelegramDesktop", NULL,   NULL,       0,            1,           -1 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
@@ -60,7 +66,11 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "terminator", NULL };
+static const char *termcmd[]  = { "alacritty", NULL };
+static const char *incvol[]  = { "/ust/bin/amixer", "set", "Master", "5+", NULL };
+static const char *decvol[]  = { "/ust/bin/amixer", "set", "Master", "5-", NULL };
+static const char *upbrightness[]   = { "xbacklight", "-inc", "10", NULL };
+static const char *downbrightness[] = { "xbacklight", "-dec", "10", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -86,8 +96,10 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
+	{ 0,            XF86XK_AudioLowerVolume,   spawn,          {.v = decvol } },
+	{ 0,            XF86XK_AudioRaiseVolume,   spawn,          {.v = incvol } },
+	{ 0,            XF86XK_MonBrightnessUp,    spawn,          {.v = upbrightness } },
+	{ 0,            XF86XK_MonBrightnessDown,  spawn,          {.v = downbrightness } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
