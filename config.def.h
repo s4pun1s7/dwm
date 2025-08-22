@@ -6,7 +6,7 @@
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#222222";
@@ -74,11 +74,14 @@ static const char *incvol[]  = { "/ust/bin/amixer", "set", "Master", "5+", NULL 
 static const char *decvol[]  = { "/ust/bin/amixer", "set", "Master", "5-", NULL };
 /*static const char *upbrightness[]   = { "xbacklight", "-inc", "10", NULL };
 static const char *downbrightness[] = { "xbacklight", "-dec", "10", NULL }; */
+static const char *scrotcmd[]  = { "/ust/bin/flameshot", "gui", NULL };
+static const char *flamecmd[]  = { "st", "-e", "flameshot", "gui", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                 		XK_Return, spawn,          {.v = termcmd } },
+	{ 0,                    		XK_Print,  spawn,          {.v = flamecmd } },
 	{ MODKEY,                 		XK_r,       spawn,          {.v = htopcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_n,      togglealttag,   {0} },
