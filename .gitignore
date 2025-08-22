@@ -21,7 +21,6 @@ core.*
 *.tmp
 *.temp
 *~
-patches/
 
 # Backup files
 *.bak
