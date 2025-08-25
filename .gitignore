@@ -3,9 +3,12 @@
 *.a
 *.so
 *.dylib
+*.orig
+patches/
 
 # Executables
 dwm
+autostart.sh
 
 # Debug files
 *.dSYM/
@@ -21,7 +24,6 @@ core.*
 *.tmp
 *.temp
 *~
-patches/
 
 # Backup files
 *.bak

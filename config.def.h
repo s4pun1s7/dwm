@@ -4,14 +4,9 @@
 
 /* appearance */
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const unsigned int barpadv	= 10;		/* bar vertical padding (from top)*/
-static const unsigned int barpadh	= 10;		/* bar vertical padding (from top)*/
-static const unsigned int barheight	= 2;		/* bar vertical padding (from top)*/
-static const unsigned int barborder	= 2;		/* bar vertical padding (from top)*/
-static const unsigned int floatbar	= 1;		/* 0 means bar won't float; float or dock the bar */
-static const unsigned int snap      = 16;       /* snap pixel */
+static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 1;        /* 0 means bottom bar */
+static const int topbar             = 0;        /* 0 means bottom bar */
 static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 static const char col_gray1[]       = "#002b36";
@@ -51,9 +46,9 @@ static const Rule rules[] = {
 	{ "Emulator",    NULL,       NULL,       0,            1,          -1 },
 	{ "Google-chrome", NULL,     NULL,       0,            1,          -1 },
 	{ "Guake",      NULL,       NULL,       0,            1,           -1 },
-	{ "ViberPC",  NULL,       NULL,        0,            1,            -1 },
-	{ "TelegramDesktop", NULL,   NULL,       0,            1,          -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,             -1 },
+	{ "ViberPC",  NULL,       NULL,        0,            1,           -1 },
+	{ "TelegramDesktop", NULL,   NULL,       0,            1,           -1 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -89,17 +84,19 @@ static const char *htopcmd[]  = { "st", "-e", "htop", NULL };
 static const char *fmcmd[]  = { "st", "-e", "ranger", NULL };
 static const char *incvol[]  = { "/ust/bin/amixer", "set", "Master", "5+", NULL };
 static const char *decvol[]  = { "/ust/bin/amixer", "set", "Master", "5-", NULL };
-static const char *upbrightness[]   = { "brightnessctl", "set", "+8", NULL };
-static const char *downbrightness[] = { "brightnessctl", "set", "8-", NULL }; 
+static const char *upbrightness[]   = { "brightnessctl", "s", "+10%", NULL };
+static const char *downbrightness[] = { "xbacklight", "s", "10%-", NULL }; 
+static const char *scrotcmd[]  = { "/ust/bin/flameshot", "gui", NULL };
+static const char *flamecmd[]  = { "st", "-e", "flameshot", "gui", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                 		XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                 		XK_r,      spawn,          {.v = htopcmd } },
-	{ MODKEY,                 		XK_e,      spawn,          {.v = fmcmd } },
-	{ MODKEY,                 		XK_t,      spawn,          {.v = tgcmd } },
+	{ 0,                    		XK_Print,  spawn,          {.v = flamecmd } },
+	{ MODKEY,                 		XK_r,       spawn,          {.v = htopcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_n,      togglealttag,   {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
