@@ -175,8 +175,7 @@
 /* The systray patch adds systray for the status bar.
  * https://dwm.suckless.org/patches/systray/
  */
-#define BAR_SYSTRAY_PATCH 0
-
+#define BAR_SYSTRAY_PATCH 1
 /* Show tag symbols in the bar. */
 #define BAR_TAGS_PATCH 1
 
@@ -188,8 +187,7 @@
 /* This patch underlines the selected tag, or optionally all tags.
  * https://dwm.suckless.org/patches/underlinetags/
  */
-#define BAR_UNDERLINETAGS_PATCH 0
-
+#define BAR_UNDERLINETAGS_PATCH 1
 /* This patch adds the window icon next to the window title in the bar.
  *
  * The patch depends on Imlib2 for icon scaling.
@@ -260,14 +258,12 @@
  * when including this patch.
  * https://dwm.suckless.org/patches/alpha/
  */
-#define BAR_ALPHA_PATCH 0
-
+#define BAR_ALPHA_PATCH 1
 /* This patch introduces alternative tags which can be switched on the fly for the
  * sole purpose of providing visual aid.
  * https://dwm.suckless.org/patches/alternativetags/
  */
-#define BAR_ALTERNATIVE_TAGS_PATCH 0
-
+#define BAR_ALTERNATIVE_TAGS_PATCH 1
 /* This patches provides the ability to use alternative text for tags which contain at
  * least one window.
  * https://dwm.suckless.org/patches/alttagsdecoration/
@@ -353,8 +349,7 @@
 /* This patch prevents dwm from drawing tags with no clients (i.e. vacant) on the bar.
  * https://dwm.suckless.org/patches/hide_vacant_tags/
  */
-#define BAR_HIDEVACANTTAGS_PATCH 0
-
+#define BAR_HIDEVACANTTAGS_PATCH 1
 /* With this patch dwm's built-in status bar is only shown when HOLDKEY is pressed
  * and the bar will now overlay the display.
  * http://dwm.suckless.org/patches/holdbar/
@@ -384,8 +379,7 @@
  * toggled in unison when vanitygaps are toggled. Increasing or decreasing gaps during runtime
  * will not affect the bar padding.
  */
-#define BAR_PADDING_VANITYGAPS_PATCH 0
-
+#define BAR_PADDING_VANITYGAPS_PATCH 1
 /* Smart bar padding patch that automatically adjusts the padding when there is
  * only one client on the monitor. Works well with vanitygaps and barpadding
  * patches.
@@ -423,8 +417,7 @@
 /* This patch draws and updates the statusbar on all monitors.
  * https://dwm.suckless.org/patches/statusallmons/
  */
-#define BAR_STATUSALLMONS_PATCH 0
-
+#define BAR_STATUSALLMONS_PATCH 1
 /* This patch enables colored text in the status bar. It changes the way colors are defined
  * in config.h allowing multiple color combinations for use in the status script.
  * This patch is incompatible with and takes precedence over the status2d patch.
@@ -504,8 +497,7 @@
  * This patch takes precedence over ATTACHBOTTOM_PATCH.
  * https://dwm.suckless.org/patches/attachbelow/
  */
-#define ATTACHBELOW_PATCH 0
-
+#define ATTACHBELOW_PATCH 1
 /* This patch adds new clients at the bottom of the stack.
  * https://dwm.suckless.org/patches/attachbottom/
  */
@@ -763,8 +755,7 @@
  * again it shows the bar and restores the layout that was active before going fullscreen.
  * https://dwm.suckless.org/patches/fullscreen/
  */
-#define FULLSCREEN_PATCH 0
-
+#define FULLSCREEN_PATCH 1
 /* Adds a rule identifying clients as a "game" such that if the client is in fullscreen and it
  * loses focus (e.g. by moving to another tag) then it will automatically be minimized (set to
  * IconicState and unmapped).
@@ -832,8 +823,7 @@
  * in such scenarios the previous window loses fullscreen.
  * https://github.com/bakkeby/patches/blob/master/dwm/dwm-losefullscreen-6.2.diff
  */
-#define LOSEFULLSCREEN_PATCH 0
-
+#define LOSEFULLSCREEN_PATCH 1
 /* This patch adds helper functions for maximizing, horizontally and vertically, floating
  * windows using keybindings.
  * https://dwm.suckless.org/patches/maximize/
@@ -883,8 +873,7 @@
 /* This patch allows you to move clients around in the stack and swap them with the master.
  * https://dwm.suckless.org/patches/movestack/
  */
-#define MOVESTACK_PATCH 0
-
+#define MOVESTACK_PATCH 1
 /* This patch allows you to change the names of tags during runtime.
  *
  * This is a bespoke version implemented specifically in relation to tagicons, which is integrated
@@ -972,13 +961,11 @@
  * monitor (default).
  * https://dwm.suckless.org/patches/pertag/
  */
-#define PERTAG_PATCH 0
-
+#define PERTAG_PATCH 1
 /* Option to enable gaps on a per tag basis rather than globally.
  * Depends on both pertag and vanitygaps patches being enabled.
  */
-#define PERTAG_VANITYGAPS_PATCH 0
-
+#define PERTAG_VANITYGAPS_PATCH 1
 /* This patch allows configuring vanity gaps on a per-monitor basis rather than
  * all monitors (default).
  */
@@ -1053,8 +1040,7 @@
  * Additionally dwm can quit cleanly by using kill -TERM dwmpid.
  * https://dwm.suckless.org/patches/restartsig/
  */
-#define RESTARTSIG_PATCH 0
-
+#define RESTARTSIG_PATCH 1
 /* Adds rio-like drawing to resize the selected client.
  * This depends on an external tool slop being installed.
  * This patch was backported from instantWM.
@@ -1092,8 +1078,7 @@
  * https://lists.suckless.org/hackers/2004/17205.html
  * https://dwm.suckless.org/patches/scratchpads/
  */
-#define SCRATCHPADS_PATCH 0
-
+#define SCRATCHPADS_PATCH 1
 /* Minor alteration of the above allowing clients to keep their size and position when shown */
 #define SCRATCHPADS_KEEP_POSITION_AND_SIZE_PATCH 0
 
@@ -1431,8 +1416,7 @@
  * https://github.com/bakkeby/patches/blob/master/dwm/dwm-vanitygaps-6.2.diff
  * https://github.com/bakkeby/patches/blob/master/dwm/dwm-cfacts-vanitygaps-6.2.diff
  */
-#define VANITYGAPS_PATCH 0
-
+#define VANITYGAPS_PATCH 1
 /* This patch adds outer gaps for the monocle layout.
  * Most gaps patches tries to avoid gaps on the monocle layout, as it is often used as a
  * fullscreen mode, hence this is enabled separately from the main vanitygaps patch.
@@ -1522,8 +1506,7 @@
 /* Centered master layout.
  * https://dwm.suckless.org/patches/centeredmaster/
  */
-#define CENTEREDMASTER_LAYOUT 0
-
+#define CENTEREDMASTER_LAYOUT 1
 /* Centered floating master layout.
  * https://dwm.suckless.org/patches/centeredmaster/
  */
