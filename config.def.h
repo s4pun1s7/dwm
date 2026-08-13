@@ -188,7 +188,7 @@ static char selbordercolor[]             = "#88C0D0";
 static char selfloatcolor[]              = "#88C0D0";
 
 static char titlenormfgcolor[]           = "#C8D0DC";
-static char titlenormbgcolor[]           = "#14171E";
+static char titlenormbgcolor[]           = "#1C212B";
 static char titlenormbordercolor[]       = "#1C212B";
 static char titlenormfloatcolor[]        = "#88C0D0";
 
@@ -921,6 +921,9 @@ static const char *incvol[]   = { "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AU
 static const char *decvol[]   = { "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; pkill -USR1 -x slstatus", NULL };
 static const char *mutevol[]  = { "/bin/sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; pkill -USR1 -x slstatus", NULL };
 static const char *scrotcmd[] = { "flameshot", "gui", NULL };
+/* Rolls a new wallpaper from ~/wallpapers and rethemes dwm, alacritty, dunst
+ * and tmux from it via pywal. Reloads this bar's colours through fsignal. */
+static const char *wallpapercmd[] = { "/bin/sh", "-c", "$HOME/.dotfiles/scripts/setwallpaper.sh", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -1241,6 +1244,7 @@ static const Key keys[] = {
 	#if XRDB_PATCH || XRESOURCES_PATCH
 	{ MODKEY|ShiftMask,             XK_F5,         xrdb,                   {.v = NULL } },
 	#endif // XRDB_PATCH | XRESOURCES_PATCH
+	{ MODKEY|ControlMask,           XK_w,          spawn,                  {.v = wallpapercmd } },
 	{ MODKEY,                       XK_t,          setlayout,              {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,          setlayout,              {.v = &layouts[1]} },
 	{ MODKEY,                       XK_m,          setlayout,              {.v = &layouts[2]} },
