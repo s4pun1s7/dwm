@@ -917,9 +917,9 @@ static const char *dmenucmd[] = {
 };
 static const char *termcmd[]  = { "alacritty", NULL };
 static const char *htopcmd[]  = { "st", "-e", "htop", NULL };
-static const char *incvol[]   = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%+", NULL };
-static const char *decvol[]   = { "wpctl", "set-volume", "@DEFAULT_AUDIO_SINK@", "5%-", NULL };
-static const char *mutevol[]  = { "wpctl", "set-mute", "@DEFAULT_AUDIO_SINK@", "toggle", NULL };
+static const char *incvol[]   = { "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; pkill -USR1 -x slstatus", NULL };
+static const char *decvol[]   = { "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; pkill -USR1 -x slstatus", NULL };
+static const char *mutevol[]  = { "/bin/sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; pkill -USR1 -x slstatus", NULL };
 static const char *scrotcmd[] = { "flameshot", "gui", NULL };
 
 #if BAR_STATUSCMD_PATCH
@@ -1536,6 +1536,10 @@ static const Button buttons[] = {
 	#else
 	{ ClkStatusText,        0,                   Button2,        spawn,          {.v = termcmd } },
 	#endif // BAR_STATUSCMD_PATCH
+	/* status bar volume: click mute, scroll up/down */
+	{ ClkStatusText,        0,                   Button1,        spawn,          {.v = mutevol } },
+	{ ClkStatusText,        0,                   Button4,        spawn,          {.v = incvol } },
+	{ ClkStatusText,        0,                   Button5,        spawn,          {.v = decvol } },
 	#if PLACEMOUSE_PATCH
 	/* placemouse options, choose which feels more natural:
 	 *    0 - tiled position is relative to mouse cursor
