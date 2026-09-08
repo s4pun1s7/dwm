@@ -920,6 +920,8 @@ static const char *htopcmd[]  = { "st", "-e", "htop", NULL };
 static const char *incvol[]   = { "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%+; pkill -USR1 -x slstatus", NULL };
 static const char *decvol[]   = { "/bin/sh", "-c", "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-; pkill -USR1 -x slstatus", NULL };
 static const char *mutevol[]  = { "/bin/sh", "-c", "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle; pkill -USR1 -x slstatus", NULL };
+static const char *incbright[] = { "/bin/sh", "-c", "$HOME/.dotfiles/scripts/brightness.sh up", NULL };
+static const char *decbright[] = { "/bin/sh", "-c", "$HOME/.dotfiles/scripts/brightness.sh down", NULL };
 static const char *scrotcmd[] = { "flameshot", "gui", NULL };
 /* Rolls a new wallpaper from ~/wallpapers and rethemes dwm, alacritty, dunst
  * and tmux from it via pywal. Reloads this bar's colours through fsignal. */
@@ -1073,6 +1075,8 @@ static const Key keys[] = {
 	{ 0,            XF86XK_AudioLowerVolume,       spawn,                  {.v = decvol } },
 	{ 0,            XF86XK_AudioRaiseVolume,       spawn,                  {.v = incvol } },
 	{ 0,            XF86XK_AudioMute,              spawn,                  {.v = mutevol } },
+	{ 0,            XF86XK_MonBrightnessUp,        spawn,                  {.v = incbright } },
+	{ 0,            XF86XK_MonBrightnessDown,      spawn,                  {.v = decbright } },
 	#if TOGGLETOPBAR_PATCH
 	{ MODKEY|ShiftMask,             XK_b,          toggletopbar,           {0} },
 	#endif // TOGGLETOPBAR_PATCH
@@ -1540,10 +1544,12 @@ static const Button buttons[] = {
 	#else
 	{ ClkStatusText,        0,                   Button2,        spawn,          {.v = termcmd } },
 	#endif // BAR_STATUSCMD_PATCH
-	/* status bar volume: click mute, scroll up/down */
+	/* status bar: scroll volume; Mod+scroll brightness; click mute */
 	{ ClkStatusText,        0,                   Button1,        spawn,          {.v = mutevol } },
 	{ ClkStatusText,        0,                   Button4,        spawn,          {.v = incvol } },
 	{ ClkStatusText,        0,                   Button5,        spawn,          {.v = decvol } },
+	{ ClkStatusText,        MODKEY,              Button4,        spawn,          {.v = incbright } },
+	{ ClkStatusText,        MODKEY,              Button5,        spawn,          {.v = decbright } },
 	#if PLACEMOUSE_PATCH
 	/* placemouse options, choose which feels more natural:
 	 *    0 - tiled position is relative to mouse cursor
