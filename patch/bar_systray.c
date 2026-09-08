@@ -121,8 +121,11 @@ removesystrayicon(Client *i)
 
 	if (!showsystray || !i)
 		return;
+	/* Note the *ii, not ii: ii is the address of a next-pointer and so is
+	 * never NULL. If the walk fell off the end the icon was not in the list,
+	 * and writing through ii would splice freed memory back in. */
 	for (ii = &systray->icons; *ii && *ii != i; ii = &(*ii)->next);
-	if (ii)
+	if (*ii)
 		*ii = i->next;
 	refresh_systray_icons = 1;
 	XReparentWindow(dpy, i->win, root, 0, 0);

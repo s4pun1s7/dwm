@@ -1475,6 +1475,9 @@ clientmessage(XEvent *e)
 			sendevent(c->win, xatom[Xembed], StructureNotifyMask, CurrentTime, XEMBED_EMBEDDED_NOTIFY, 0 , systray->win, XEMBED_EMBEDDED_VERSION);
 			XSync(dpy, False);
 			setclientstate(c, NormalState);
+			/* Re-lay out the bar now: the new icon widens the systray module,
+			 * and nothing else in the dock path triggers a redraw. */
+			drawbarwin(systray->bar);
 		}
 		return;
 	}
@@ -4814,9 +4817,12 @@ unmapnotify(XEvent *e)
 	#if BAR_SYSTRAY_PATCH
 	} else if (showsystray && (c = wintosystrayicon(ev->window))) {
 		/* KLUDGE! sometimes icons occasionally unmap their windows, but do
-		 * _not_ destroy them. We map those windows back */
+		 * _not_ destroy them. We map those windows back.
+		 * Do NOT remove the icon here: an XEMBED client unmapping itself is
+		 * how it asks to be hidden, and updatesystrayiconstate() handles that
+		 * via XEMBED_MAPPED. Evicting it reparents the icon back to root for
+		 * good, so it never returns to the tray. */
 		XMapRaised(dpy, c->win);
-		removesystrayicon(c);
 		drawbarwin(systray->bar);
 	#endif // BAR_SYSTRAY_PATCH
 	}
